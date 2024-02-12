@@ -1,0 +1,103 @@
+<html style="overflow-y: hidden;">
+<head>
+    <!-- [BOOTSTRAP] -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div id="main">
+        <div v-if="gameState">
+            <div class="flagStatus">
+                <div class="d-flex justify-content-center mb-1">
+					<h4 class="text-center" style="margin: 0;">
+						<span style="font-weight: 100;">ดันเจี้ยน</span>
+						<span class="badge badge-light" style="font-weight: 100; margin-left: 10px;">{{ gameTimer }}</span>
+					</h4>
+				</div>
+				<div class="justify-content-center" style="margin-top: 5px;">
+					<h5 class="text-center" style="margin-top: 5px;">
+						<span><i class="fas fa-box"></i></span>
+						<span class="text-danger" style="font-weight: 100; margin-left: 10px;">{{ score }}</span>
+					</h5>
+				</div>
+				<div class="justify-content-center" style="margin-top: 5px;">
+					<div v-if="currentTeam">
+						<div class="row" v-for="(v, i) in currentTeam" style="margin: 3px 0; font-size: 14px; max-width: 400px;">
+							<span class="col-sm-1">#{{ i+1 }}</span>
+							<div class="col-sm-6" style="overflow: hidden; text-overflow: ellipsis;">{{ v.playerName }}</div>
+							<div class="col-sm-2 text-warning ">
+								<span v-if="v.keys > 4"><i class="fas fa-key"></i></span>
+							</div>
+							<div class="col-sm-3 text-right">
+								<span v-if="v.health > 0" class="text-success"><i class="fas fa-heart"></i> {{ v.health }}</span>
+								<span v-else class="text-danger" ><i class="fas fa-skull-crossbones"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+
+        <div class="ui">
+            <div class="container mb-5" style="max-width: 800px;">
+                <div class="text-center">
+                    <h2><span class="text-white">ดันเจี้ยน</span></h2>
+                </div>
+                <div class="mx-auto mt-2">
+                    <div class="row teamSelectorContent no-gutters text-center" style="margin: 0;">
+                        <div class="col">
+                            <h4 class="text-danger mb-1">รายชื่อ</h4>
+                            <div v-if="currentTeam">
+                                <p><i class="fas fa-user-friends"></i> {{ currentTeam.length }} / {{ maxP }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  justify-content-center teamSelectorContent no-gutters" style="margin: 0;">
+                        <div class="col-10 memberList">
+                            <div v-if="currentTeam">
+                                <div class="teamMember row" v-for="(v, i) in currentTeam" style="margin: 3px 0;">
+                                    <div class="col-sm-1">#{{ i+1 }}</div>
+                                    <div class="col-sm-7">{{ v.playerName }}</div>
+									<div class="col-sm-4 text-danger text-right">
+										<span v-if="v.delay > 0"><i class="fas fa-stopwatch"></i>ติดคลูดาวน์</span>
+										<span v-else-if="!v.item"><i class="fas fa-box"></i>ไม่มีบัตร</span>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="!hasViewer">
+                        <div v-if="!hasJoinedTeam">
+                            <div class="row no-gutters mt-2 text-center" style="margin: 0;">
+                                <div class="col"><button class="btn btn-light" v-bind:disabled="disabled" v-on:click="joinTeam()">เข้าร่วมทีม</button></div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div class="text-center mt-2">
+                                <p>ดันเจี้ยนจะเริ่มใน <span class="text-danger">{{ countDownTimer }}</span></p>
+                                <button class="btn btn-danger" v-bind:disabled="disabled" v-on:click="leaveTeam()"><i class="fas fa-sign-in-alt"></i> ออกจากทีม</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ==" crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- [BOOTSTRAP] -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+</body>
+</html>

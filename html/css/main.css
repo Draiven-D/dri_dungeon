@@ -1,0 +1,173 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', 'Kanit',sans-serif;
+    user-select: none;
+}
+
+body {
+    overflow: hidden;
+    background: transparent;
+    color: white;
+}
+
+.ui {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: opacity .3s ease-in-out;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+}
+
+.ui.open {
+    opacity: 1;
+}
+
+.teamSelectorContent .memberList {
+    margin: 3px;
+}
+
+.teamSelectorContent .memberList .teamMember {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 35px;
+    border-radius: 5px;
+    align-items: center;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.flagStatus {
+    position: absolute;
+    width: 400px;
+	padding: 5px 0;
+    bottom: 1%;
+    left: 1%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.flagStatus .radius {
+    border-radius: 4px;
+    margin: 2px;
+    /* border: 1px solid rgba(255, 255, 255, 0.3); */
+}
+
+.flagStatus .flagData .flagList {
+    width: 75px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 2px;
+    padding: 0;
+}
+
+.col-margin {
+    margin: 2px;
+}
+
+.form-control {
+    background-color: rgb(48, 48, 48);
+    border: none;
+    transition: .3s;
+    color: white !important;
+    text-align: center;
+}
+
+.form-control:focus {
+    background-color: rgb(70, 70, 70);
+    outline: 0 none;
+    box-shadow: none;
+}
+
+.btn:active {
+    outline: 0 none;
+    box-shadow: none;
+}
+
+.form-control:hover {
+    background-color: rgb(70, 70, 70);
+}
+
+.list-complete-enter, .list-complete-leave-to {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: all 0.2s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.scale-enter-active, .scale-leave-active {
+    transition: all 0.2s;
+}
+
+.scale-enter, .scale-leave-to {
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    } to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    } to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
+@keyframes opacity {
+    from {
+        opacity: 1;
+    } to {
+        opacity: 0;
+    }
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+    opacity: 0;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.modal.fade.show .modal-dialog {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+   opacity: 1;
+}
+
+@keyframes showSweetAlert {
+    from {
+        -webkit-transform: scale(0.7);
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
